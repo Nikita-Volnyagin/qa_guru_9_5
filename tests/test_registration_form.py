@@ -1,5 +1,4 @@
-from pages.registration_page import RegistrationPage
-
+from demoqa_tests.pages.registration_page import RegistrationPage
 
 def test_practice_from():
     registration_page = RegistrationPage()
@@ -10,10 +9,10 @@ def test_practice_from():
     registration_page.fill_user_email('test.test@test.com')
     registration_page.gender_selection('Male')
     registration_page.fill_user_phone_number(7999158449)
-    registration_page.fill_date_of_birth('1998', 'April', '27')
+    registration_page.fill_date_of_birth('1998', 'April', '20')
     registration_page.select_user_subject('Economics')
     registration_page.user_hobby_checkbox('Sports')
-    registration_page.user_picture('image.jpg')
+    registration_page.user_picture('Image.jpg')
     registration_page.user_current_adress('Russia, Samara, 446222')
     registration_page.user_state('NCR')
     registration_page.user_city('Noida')

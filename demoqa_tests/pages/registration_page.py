@@ -1,5 +1,5 @@
 from selene import browser, be, by, have
-from tests import resource
+from demoqa_tests import resource
 
 
 class RegistrationPage:
