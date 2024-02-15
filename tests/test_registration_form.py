@@ -1,37 +1,32 @@
-from selene import browser, have, be, command
-import os
+from demoqa_tests.pages.registration_page import RegistrationPage
 
+def test_practice_from():
+    registration_page = RegistrationPage()
+    registration_page.open_registration_page()
 
-def test_registration_form_demo_qa():
-    browser.open('/automation-practice-form')
-    browser.element('#firstName').type("Nikita")
-    browser.element('#lastName').type("Nikitin")
-    browser.element('#userEmail').type('test.test@test.com')
-    browser.all('[for^=gender-radio]').element_by(have.exact_text('Male')).click()
-    browser.element('#userNumber').type('7999158449')
-    browser.element('#dateOfBirthInput').click()
-    browser.element('.react-datepicker__month-select').click()
-    browser.element('.react-datepicker__month-select [value="3"]').click()
-    browser.element('.react-datepicker__year-select').click()
-    browser.element('.react-datepicker__year-select [value="1998"]').click()
-    browser.element('.react-datepicker__day--020').click()
-    browser.element('#subjectsInput').should(be.blank).type('arts').press_enter()
-    browser.all('[for^=hobbies-checkbox-3]').element_by(have.exact_text('Music')).click()
-    browser.element('#uploadPicture').send_keys(os.path.abspath('img/Image.jpg'))
-    browser.element('#currentAddress').type('Russia, Samara, 446222')
-    browser.element('.css-yk16xz-control').click()
-    browser.element('#react-select-3-input').type('NCR').press_enter()
-    browser.element('#react-select-4-input').type('Noida').press_enter()
-    browser.element('#submit').perform(command.js.click)
+    registration_page.fill_first_name('Nikita')
+    registration_page.fill_last_name('Nikitin')
+    registration_page.fill_user_email('test.test@test.com')
+    registration_page.gender_selection('Male')
+    registration_page.fill_user_phone_number(7999158449)
+    registration_page.fill_date_of_birth('1998', 'April', '20')
+    registration_page.select_user_subject('Economics')
+    registration_page.user_hobby_checkbox('Sports')
+    registration_page.user_picture('Image.jpg')
+    registration_page.user_current_adress('Russia, Samara, 446222')
+    registration_page.user_state('NCR')
+    registration_page.user_city('Noida')
+    registration_page.submit_the_form()
 
-    browser.element('.table').all('td').even.should(have.exact_texts(
+    registration_page.should_registered_user_with(
         'Nikita Nikitin',
         'test.test@test.com',
         'Male',
         '7999158449',
         '20 April,1998',
-        'Arts',
-        'Music',
+        'Economics',
+        'Sports',
         'Image.jpg',
         'Russia, Samara, 446222',
-        'NCR Noida'))
+        'NCR Noida',
+    )
